@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as S from './styles'
 import { remover, editar } from '../../store/reducers/contato'
@@ -25,7 +25,10 @@ const Contato = ({
       setNome(nomeOriginal)
     }
     if (emailOriginal.length > 0) {
-      setNome(emailOriginal)
+      setEmail(emailOriginal)
+    }
+    if (telefoneOriginal.length > 0) {
+      setTelefone(telefoneOriginal)
     }
   }, [nomeOriginal, telefoneOriginal, emailOriginal])
 
@@ -43,7 +46,9 @@ const Contato = ({
       <S.Descricao
         disabled={!estaEditando}
         value={nome}
-        onChange={(evento) => setNome(evento.target.value)}
+        onChange={(evento: ChangeEvent<HTMLTextAreaElement>) =>
+          setNome(evento.target.value)
+        }
       />
       <S.Titulo>
         <em>Telefone</em>
@@ -51,7 +56,9 @@ const Contato = ({
       <S.Descricao
         disabled={!estaEditando}
         value={telefone}
-        onChange={(evento) => setTelefone(evento.target.value)}
+        onChange={(evento: ChangeEvent<HTMLTextAreaElement>) =>
+          setTelefone(evento.target.value)
+        }
       />
       <S.Titulo>
         <em>Email</em>
@@ -59,7 +66,9 @@ const Contato = ({
       <S.Descricao
         disabled={!estaEditando}
         value={email}
-        onChange={(evento) => setEmail(evento.target.value)}
+        onChange={(evento: ChangeEvent<HTMLTextAreaElement>) =>
+          setEmail(evento.target.value)
+        }
       />
       <S.BarraAcoes>
         {estaEditando ? (

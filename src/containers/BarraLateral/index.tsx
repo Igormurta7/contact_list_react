@@ -5,6 +5,7 @@ import * as S from './styles'
 import { RootReducer } from '../../store'
 import { alterarTermo } from '../../store/reducers/filtro'
 import { Botao, Campo } from '../../styles'
+import { ChangeEvent } from 'react'
 
 type Props = {
   mostrarFiltros: boolean
@@ -23,7 +24,7 @@ const BarraLateral = ({ mostrarFiltros }: Props) => {
               type="text"
               placeholder="Buscar"
               value={termo}
-              onChange={(evento: { target: { value: string } }) =>
+              onChange={(evento: ChangeEvent<HTMLInputElement>) =>
                 dispatch(alterarTermo(evento.target.value))
               }
             />

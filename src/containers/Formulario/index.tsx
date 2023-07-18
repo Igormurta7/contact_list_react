@@ -1,4 +1,4 @@
-import { FormEvent, SetStateAction, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BotaoSalvar, MainContainer, Titulo } from '../../styles'
 import { Campo } from '../../styles'
@@ -10,15 +10,15 @@ const Formulario = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [titulo, setTitulo] = useState('')
+  const [nome, setNome] = useState('')
   const [telefone, setTelefone] = useState('')
   const [email, setEmail] = useState('')
 
-  const cadastrarTarefa = (evento: FormEvent) => {
+  const cadastrarTarefa = (evento: FormEvent<HTMLFormElement>) => {
     evento.preventDefault()
     dispatch(
       cadastrar({
-        titulo,
+        nome,
         telefone,
         email
       })
@@ -32,20 +32,26 @@ const Formulario = () => {
       <Titulo>Novo contato</Titulo>
       <Form onSubmit={cadastrarTarefa}>
         <Campo
-          value={titulo}
-          onChange={(evento) => setTitulo(evento.target.value)}
+          value={nome}
+          onChange={(evento: ChangeEvent<HTMLInputElement>) =>
+            setNome(evento.target.value)
+          }
           type="text"
           placeholder="Nome"
         />
         <Campo
           value={telefone}
-          onChange={({ target }) => setTelefone(target.value)}
+          onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
+            setTelefone(target.value)
+          }
           type="tel"
           placeholder="Telefone"
         />
         <Campo
           value={email}
-          onChange={({ target }) => setEmail(target.value)}
+          onChange={({ target }: ChangeEvent<HTMLInputElement>) =>
+            setEmail(target.value)
+          }
           type="email"
           placeholder="E-mail"
         />
